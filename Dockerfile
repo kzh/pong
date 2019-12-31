@@ -12,12 +12,12 @@ COPY . .
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o pong .
 
-RUN pwd
-
 FROM alpine:3.10
 
 RUN apk add ca-certificates
 
-COPY --from=build /pong/pong .
+COPY --from=build /pong/pong ./pong
+
+COPY ./static ./static
 
 CMD ["./pong"]

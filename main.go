@@ -6,8 +6,7 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/", func(w http.ResponseWriter, _ *http.Request) {
-		w.Write([]byte("pong"))
-	})
+	static := http.FileServer(http.Dir("static"))
+	http.Handle("/", static)
 	log.Fatal(http.ListenAndServe(":80", nil))
 }
